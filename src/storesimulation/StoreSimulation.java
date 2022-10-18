@@ -27,9 +27,9 @@ public class StoreSimulation {
     private static ArrayList<Register> registers = new ArrayList(); // registers used in the store
 
     public static void main(String[] args) {
-        testHeap();
+        //testHeap();
         testRegister();
-        startSimulation(); //starts the simulation
+        //startSimulation(); //starts the simulation
     }
 
     public static void testHeap() {
@@ -44,9 +44,19 @@ public class StoreSimulation {
         System.out.println(h);
     }
 
+    /**
+     * very basic testing of class register just to make sure everything is working correctly
+     */
     public static void testRegister() {
         System.out.println("MAKE SURE YOU INCLUDE YOUR OWN TESTING!");
-
+        Register r = new Register(REG_SCAN_TIME, REG_PAY_TIME);
+        Customer test = new Customer(5,5,15);
+        r.add(test);
+        System.out.println(r.isEmpty()+ " Should be false");
+        System.out.println(r.peek() + " Should return Customer test");
+        System.out.println(r.getLineLength() + " Should be 1");
+        r.remove();
+        System.out.println(r.isEmpty()+ " Should be true");
     }
 
     public static void startSimulation() {
@@ -76,17 +86,17 @@ public class StoreSimulation {
      * to be updated.
      */
     private static void loadRegisters() {
-        //A loop for creatign standard checkous
+        //A loop for creating standard checkouts
         for (int i = 0; i < NUMBER_STANDARD_CHECKOUT; i++) {
-            Register r = new Register(REG_SCAN_TIME, REG_PAY_TIME); //creats register
+            Register r = new Register(REG_SCAN_TIME, REG_PAY_TIME); //creates register
             registers.add(r);//adds register to registers arrayList
         }
-        //A loop for creating self checkouts
+        //A loop for creating self-checkouts
         for (int i = 0; i < NUMBER_SELF_CHECKOUTS; i++) {
             Register r = new Register(SELF_SCAN_TIME, SELF_PAY_TIME); //Creates the same register as before but with different pay and scan times
             registers.add(r); //adds register to SAME arraylist
         }
-        //registers is an arraylist that has all the standard checkouts then all the self checkouts.
+        //registers is an arraylist that has all the standard checkouts then all the self-checkouts.
     }
 
     private static void loadCustomerData() {
