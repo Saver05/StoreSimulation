@@ -39,6 +39,10 @@ class EventHeap{
      */
     public void add(Event item)
     {
+        if (currentSize==0)
+        {
+            eventHeap[0] = item;
+        }
         if (currentSize >= CAPACITY)
         {
             return;

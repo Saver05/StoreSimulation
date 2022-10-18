@@ -27,7 +27,7 @@ public class StoreSimulation {
     private static ArrayList<Register> registers = new ArrayList(); // registers used in the store
 
     public static void main(String[] args) {
-        //testHeap();
+        testHeap();
         testRegister();
         //startSimulation(); //starts the simulation
     }
@@ -40,8 +40,9 @@ public class StoreSimulation {
 
         h.add(e1);
         h.add(e2);
+        System.out.println(h.peek()+ " Should return an event");
+        System.out.println(h.size()+" Should be two");
 
-        System.out.println(h);
     }
 
     /**
