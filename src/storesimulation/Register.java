@@ -44,8 +44,14 @@ class Register {
 
     public Customer remove()
     {
-        //remove customer at the start of the line.
-        return null;
+        Customer r = queue[start];
+        queue[start] =null;
+        start++;
+        if (start==30)
+        {
+            start =0;
+        }
+        return r;
     }
 
     /**
