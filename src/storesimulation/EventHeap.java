@@ -27,12 +27,39 @@ class EventHeap{
 
     /**
      * Removes and returns the event at the top of the heap
-     * @return 
+     * @return removed even
      */
     public Event remove() { 
-        return null;
+        Event r = eventHeap[0];
+        eventHeap[0] = eventHeap[currentSize--];
+        minimum(0);
+        return r;
     }
 
+    /**
+     * rearrange the heap so it is a minimum heap again
+     * @param pos position of element we are moving
+     */
+    private void minimum(int pos)
+    {
+        if(!isLeaf(pos))
+        {
+            int swap = pos;
+            if ((pos*2)+1<=currentSize)
+            {
+                swap = (pos*2) +1;
+            }
+            else
+            {
+                swap = (pos*2);
+            }
+            if(eventHeap[pos].getEventTime()<eventHeap[pos*2].getEventTime() || eventHeap[pos].getEventTime()> eventHeap[(pos*2)+1].getEventTime())
+            {
+                swap(pos,swap);
+                minimum(swap);
+            }
+        }
+    }
     /**
      * Insert an event into the heap. Events are ordered based on the time of the event.
      * @param item 

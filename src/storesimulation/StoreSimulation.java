@@ -42,7 +42,9 @@ public class StoreSimulation {
         h.add(e2);
         System.out.println(h.peek()+ " Should return an event");
         System.out.println(h.size()+" Should be two");
-
+        h.remove();
+        System.out.println(h.peek()+ " Should be different then above");
+        System.out.println(h.size()+" Should be one");
     }
 
     /**
