@@ -48,9 +48,17 @@ class Register {
         return null;
     }
 
+    /**
+     * if the line is empty returns true
+     * @return boolean
+     */
     public boolean isEmpty()
     {
-        return false;
+        if (size>0)
+        {
+            return false;
+        }
+        return true;
     }
 
     public Customer peek()
