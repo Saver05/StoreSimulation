@@ -52,9 +52,13 @@ class EventHeap{
             pos = parent(pos);
         }
     }
-    
+
+    /**
+     * returns the first item in the heap
+     * @return first item of heap
+     */
     public Event peek(){
-        return null;
+        return eventHeap[0];
     }
 
     /**
