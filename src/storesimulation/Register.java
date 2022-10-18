@@ -29,8 +29,12 @@ class Register {
         queue = new int[capacity-1];
     }
 
+    /**
+     * returns the current length of the line
+     * @return size
+     */
     public int getLineLength() {
-        return -1;
+        return size;
     }
 
     public void add(Customer customer)
