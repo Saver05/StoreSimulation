@@ -14,7 +14,7 @@ class Register {
 
     private double scanTime, payTime;
 
-    private int[] queue;
+    private Customer[] queue;
     private int size;
     private int capacity;
     private int start;
@@ -26,7 +26,7 @@ class Register {
         capacity=30;
         start=0;
         end=0;
-        queue = new int[capacity-1];
+        queue = new Customer[capacity-1];
     }
 
     /**
@@ -63,7 +63,7 @@ class Register {
 
     public Customer peek()
     {
-       return null;
+       return queue[start];
     }
 
     public double getScanTime()
