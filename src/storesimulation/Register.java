@@ -37,11 +37,25 @@ class Register {
         return size;
     }
 
+    /**
+     * adds a customer to the end of the queue
+     * @param customer
+     */
     public void add(Customer customer)
     {
-        //putting the customer at the end of the line
+        end++;
+        if (end==30)
+        {
+            end = 0;
+        }
+        queue[end] = customer;
+        size++;
     }
 
+    /**
+     * Removes the first item from the queue and returns it
+     * @return removed Customer
+     */
     public Customer remove()
     {
         Customer r = queue[start];
@@ -51,6 +65,7 @@ class Register {
         {
             start =0;
         }
+        size--;
         return r;
     }
 
@@ -67,6 +82,10 @@ class Register {
         return true;
     }
 
+    /**
+     * returns the first item in the queue
+     * @return First customer in queue
+     */
     public Customer peek()
     {
        return queue[start];
