@@ -19,10 +19,10 @@ class EventHeap{
 
    /**
     *  Returns the current number of events in the heap
-    * @return 
+    * @return currentSize
     */
     public int size() { 
-        return -1;
+        return currentSize;
     }
 
     /**
