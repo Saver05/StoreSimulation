@@ -13,38 +13,54 @@ package storesimulation;
 class Register { 
 
     private double scanTime, payTime;
+
+    private int[] queue;
+    private int size;
+    private int capacity;
+    private int start;
+    private int end;
     
-    
-    public Register(double scanTime, double payTime) {
-        
+    public Register(double scanTime, double payTime)
+    {
+        size =0;
+        capacity=30;
+        start=0;
+        end=0;
+        queue = new int[capacity-1];
     }
 
     public int getLineLength() {
         return -1;
     }
 
-    public void add(Customer customer) {
+    public void add(Customer customer)
+    {
         //putting the customer at the end of the line
     }
 
-    public Customer remove() {
+    public Customer remove()
+    {
         //remove customer at the start of the line.
         return null;
     }
 
-    public boolean isEmpty() {
+    public boolean isEmpty()
+    {
         return false;
     }
 
-    public Customer peek() {
+    public Customer peek()
+    {
        return null;
     }
 
-    public double getScanTime() {
+    public double getScanTime()
+    {
         return this.scanTime;
     }
 
-    public double getPayTime() {
+    public double getPayTime()
+    {
         return this.payTime;
     }
     
