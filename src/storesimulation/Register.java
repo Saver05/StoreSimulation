@@ -44,7 +44,7 @@ class Register {
     public void add(Customer customer)
     {
         end++;
-        if (end==30)
+        if (end==29)
         {
             end = 0;
         }
@@ -61,7 +61,7 @@ class Register {
         Customer r = queue[start];
         queue[start] =null;
         start++;
-        if (start==30)
+        if (start==29)
         {
             start =0;
         }

@@ -27,9 +27,9 @@ public class StoreSimulation {
     private static ArrayList<Register> registers = new ArrayList(); // registers used in the store
 
     public static void main(String[] args) {
-        testHeap();
-        testRegister();
-        //startSimulation(); //starts the simulation
+        //testHeap();
+        //testRegister();
+        startSimulation(); //starts the simulation
     }
 
     public static void testHeap() {
@@ -151,21 +151,99 @@ public class StoreSimulation {
             startCheckout(customer);
         }
     }
-
     private static void startCheckout(Customer customer) {
-        int line = customer.getCheckoutLine();
-        double checkoutLength = customer.getNumItems() * registers.get(line).getScanTime() + registers.get(line).getPayTime();
-        Event endCheckout = new Event(customer, checkoutLength + simClock, EventType.END_CHECKOUT);
-        events.add(endCheckout);
+        if (customer != null) { //there is one single customer that is null so this just ignores him
+            int line = customer.getCheckoutLine();
+            double checkoutLength = customer.getNumItems() * registers.get(line).getScanTime() + registers.get(line).getPayTime();
+            Event endCheckout = new Event(customer, checkoutLength + simClock, EventType.END_CHECKOUT);
+            events.add(endCheckout);
+        }
     }
 
-    private static int getShortestLine(int items) {
-        return -1;
+    private static int getShortestLine(int items)
+    {
+        int shortestLength = 30;
+        int r =0;
+        for (int i =0;i<registers.size();i++)
+        {
+            if(items> 49)
+            {
+                if (registers.get(i).getScanTime() != REG_SCAN_TIME)
+                {
+                    if (registers.get(i).isEmpty())
+                    {
+                        return i;
+                    }
+                    if(registers.get(i).getLineLength()<shortestLength)
+                    {
+                        r =i;
+                        shortestLength = registers.get(i).getLineLength();
+                    }
+                }
+            }
+            else
+            {
+                if (registers.get(i).isEmpty())
+                {
+                    return i;
+                }
+                if(registers.get(i).getLineLength()<shortestLength)
+                {
+                    r =i;
+                    shortestLength = registers.get(i).getLineLength();
+                }
+            }
+        }
+        return r;
     }
 
-    private static void printCollectedStatistics() {
-        System.out.println("NOT IMPLEMENTED YET!");
-        System.out.println("This is a place for you to print the statistics out.");
+    private static void printCollectedStatistics()
+    {
+        for (int i =0;i<50;i++)
+        {
+            System.out.print("*");
+        }
+        System.out.println();
+        System.out.println("Regular Registers: ");
+        for (int i =0;i<NUMBER_STANDARD_CHECKOUT;i++)
+        {
+            System.out.println("    Register "+i);
+            System.out.println("        Average wait time: ");
+            System.out.println("        Customers Served: ");
+            System.out.println("        Longest Line: ");
+        }
+        for (int i =0;i<50;i++)
+        {
+            System.out.print("*");
+        }
+        System.out.println();
+        System.out.println("Self Checkout: ");
+        for (int i =NUMBER_STANDARD_CHECKOUT;i<NUMBER_STANDARD_CHECKOUT+NUMBER_SELF_CHECKOUTS;i++)
+        {
+            System.out.println("    Self Checkout "+i);
+            System.out.println("        Average wait time: ");
+            System.out.println("        Customers Served: ");
+            System.out.println("        Longest Line: ");
+        }
+        for (int i =0;i<50;i++)
+        {
+            System.out.print("*");
+        }
+        System.out.println();
+        System.out.println("Over All: ");
+        System.out.println("    Average wait time: ");
+        System.out.println("    Average wait time per regular register: ");
+        System.out.println("    Average wait time per self-checkout: ");
+        System.out.println("    Maximum line length: ");
+        System.out.println("    Percentage of customers who waited: ");
+        System.out.println("        Two or more minutes: ");
+        System.out.println("        Three or more minutes: ");
+        System.out.println("        Five or more minutes: ");
+        System.out.println("        Ten or more minutes: ");
+        for (int i =0;i<50;i++)
+        {
+            System.out.print("*");
+        }
     }
 
 }
