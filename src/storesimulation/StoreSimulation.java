@@ -15,8 +15,8 @@ import java.util.Scanner;
  */
 public class StoreSimulation {
 
-    private static final int NUMBER_STANDARD_CHECKOUT = 6; // number of cashier registers
-    private static final int NUMBER_SELF_CHECKOUTS = 4; // number of self-scan registers
+    private static final int NUMBER_STANDARD_CHECKOUT = 5; // number of cashier registers
+    private static final int NUMBER_SELF_CHECKOUTS = 5; // number of self-scan registers
     private static final double SELF_SCAN_TIME = .03;
     private static final double SELF_PAY_TIME = 3.5;
     private static final double REG_PAY_TIME = 2.0;
@@ -27,8 +27,8 @@ public class StoreSimulation {
     private static ArrayList<Register> registers = new ArrayList(); // registers used in the store
 
     public static void main(String[] args) {
-        //testHeap();
-        //testRegister();
+        testHeap();
+        testRegister();
         startSimulation(); //starts the simulation
     }
 
@@ -152,7 +152,7 @@ public class StoreSimulation {
         }
     }
     private static void startCheckout(Customer customer) {
-        if (customer != null) { //there is one single customer that is null so this just ignores him
+        if (customer != null) { //there is one single customer as far as I can tell that is null so this just ignores him
             int line = customer.getCheckoutLine();
             double checkoutLength = customer.getNumItems() * registers.get(line).getScanTime() + registers.get(line).getPayTime();
             Event endCheckout = new Event(customer, checkoutLength + simClock, EventType.END_CHECKOUT);
@@ -168,7 +168,7 @@ public class StoreSimulation {
         {
             if(items> 49)
             {
-                if (registers.get(i).getScanTime() != REG_SCAN_TIME)
+                if (registers.get(i).getScanTime() != SELF_SCAN_TIME)
                 {
                     if (registers.get(i).isEmpty())
                     {
@@ -208,9 +208,9 @@ public class StoreSimulation {
         for (int i =0;i<NUMBER_STANDARD_CHECKOUT;i++)
         {
             System.out.println("    Register "+i);
-            System.out.println("        Average wait time: ");
-            System.out.println("        Customers Served: ");
-            System.out.println("        Longest Line: ");
+            System.out.println("        Average wait time: " + registers.get(i).getAverageTime());
+            System.out.println("        Customers Served: " + registers.get(i).getNumCust());
+            System.out.println("        Longest Line: "+ registers.get(i).getMaxSize());
         }
         for (int i =0;i<50;i++)
         {
@@ -221,9 +221,9 @@ public class StoreSimulation {
         for (int i =NUMBER_STANDARD_CHECKOUT;i<NUMBER_STANDARD_CHECKOUT+NUMBER_SELF_CHECKOUTS;i++)
         {
             System.out.println("    Self Checkout "+i);
-            System.out.println("        Average wait time: ");
-            System.out.println("        Customers Served: ");
-            System.out.println("        Longest Line: ");
+            System.out.println("        Average wait time: "+ registers.get(i).getAverageTime());
+            System.out.println("        Customers Served: " + registers.get(i).getNumCust());
+            System.out.println("        Longest Line: " + registers.get(i).getMaxSize());
         }
         for (int i =0;i<50;i++)
         {

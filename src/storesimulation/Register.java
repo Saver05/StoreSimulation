@@ -6,6 +6,8 @@
 
 package storesimulation;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author timmermank1
@@ -19,6 +21,10 @@ class Register {
     private int capacity;
     private int start;
     private int end;
+
+    private int max;
+    private ArrayList<Integer> numItems = new ArrayList<Integer>();
+    private int numCust;
     
     public Register(double scanTime, double payTime)
     {
@@ -27,6 +33,8 @@ class Register {
         start=0;
         end=0;
         queue = new Customer[capacity-1];
+        numCust =0;
+        max =0;
     }
 
     /**
@@ -50,6 +58,12 @@ class Register {
         }
         queue[end] = customer;
         size++;
+        numCust++;
+        numItems.add(customer.getNumItems());
+        if (getLineLength()>max)
+        {
+            max = getLineLength();
+        }
     }
 
     /**
@@ -100,6 +114,29 @@ class Register {
     {
         return this.payTime;
     }
-    
-   
+
+    public int getNumCust()
+    {
+        return this.numCust;
+    }
+
+    public double getAverageTime()
+    {
+        double average =0;
+        int counter = numItems.size();
+        int add =0;
+        for (int i : numItems)
+        {
+            add = add+i;
+        }
+        if (counter != 0) {
+            average = add / counter;
+        }
+        return average;
+    }
+
+    public int getMaxSize()
+    {
+        return this.max;
+    }
 }
