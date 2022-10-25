@@ -210,7 +210,7 @@ public class StoreSimulation {
             i++;
             System.out.println("    Register "+i);
             i--;
-            System.out.println("        Average wait time: " + registers.get(i).getAverageTime());
+            System.out.println("        Average wait time: ");
             System.out.println("        Customers Served: " + registers.get(i).getNumCust());
             System.out.println("        Longest Line: "+ registers.get(i).getMaxSize());
 
@@ -226,7 +226,7 @@ public class StoreSimulation {
             i++;
             System.out.println("    Self Checkout "+i);
             i--;
-            System.out.println("        Average wait time: "+ registers.get(i).getAverageTime());
+            System.out.println("        Average wait time: ");
             System.out.println("        Customers Served: " + registers.get(i).getNumCust());
             System.out.println("        Longest Line: " + registers.get(i).getMaxSize());
         }

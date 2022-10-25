@@ -120,22 +120,6 @@ class Register {
         return this.numCust;
     }
 
-    public double getAverageTime()
-    {
-        double average =0;
-        int counter = numItems.size();
-        int add =0;
-        for (int i : numItems)
-        {
-            add = add+i;
-        }
-
-        if (counter != 0) {
-            average = add / counter;
-        }
-        return average;
-    }
-
     public int getMaxSize()
     {
         return this.max;
