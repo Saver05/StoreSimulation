@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class StoreSimulation {
 
     private static final int NUMBER_STANDARD_CHECKOUT = 5; // number of cashier registers
-    private static final int NUMBER_SELF_CHECKOUTS = 5; // number of self-scan registers
+    private static final int NUMBER_SELF_CHECKOUTS = 6; // number of self-scan registers
     private static final double SELF_SCAN_TIME = .03;
     private static final double SELF_PAY_TIME = 3.5;
     private static final double REG_PAY_TIME = 2.0;
@@ -207,10 +207,13 @@ public class StoreSimulation {
         System.out.println("Regular Registers: ");
         for (int i =0;i<NUMBER_STANDARD_CHECKOUT;i++)
         {
+            i++;
             System.out.println("    Register "+i);
+            i--;
             System.out.println("        Average wait time: " + registers.get(i).getAverageTime());
             System.out.println("        Customers Served: " + registers.get(i).getNumCust());
             System.out.println("        Longest Line: "+ registers.get(i).getMaxSize());
+
         }
         for (int i =0;i<50;i++)
         {
@@ -220,7 +223,9 @@ public class StoreSimulation {
         System.out.println("Self Checkout: ");
         for (int i =NUMBER_STANDARD_CHECKOUT;i<NUMBER_STANDARD_CHECKOUT+NUMBER_SELF_CHECKOUTS;i++)
         {
+            i++;
             System.out.println("    Self Checkout "+i);
+            i--;
             System.out.println("        Average wait time: "+ registers.get(i).getAverageTime());
             System.out.println("        Customers Served: " + registers.get(i).getNumCust());
             System.out.println("        Longest Line: " + registers.get(i).getMaxSize());
@@ -229,8 +234,26 @@ public class StoreSimulation {
         {
             System.out.print("*");
         }
+        int totalCustomers =0;
         System.out.println();
+        for (Register i : registers)
+        {
+            totalCustomers = i.getNumCust() + totalCustomers;
+        }
         System.out.println("Over All: ");
+        System.out.println("Number of total customers: " +totalCustomers);
+        int max =0;
+        for (Register i : registers)
+        {
+            if (max<i.getMaxSize())
+            {
+                max=i.getMaxSize();
+            }
+        }
+        System.out.println("    Average wait time: ");
+        System.out.println("    Average wait time per regular register: ");
+        System.out.println("    Average wait time per self-checkout: ");
+        System.out.println("    Maximum line length: "+max);
         System.out.println("    Average wait time: ");
         System.out.println("    Average wait time per regular register: ");
         System.out.println("    Average wait time per self-checkout: ");

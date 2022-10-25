@@ -129,6 +129,7 @@ class Register {
         {
             add = add+i;
         }
+
         if (counter != 0) {
             average = add / counter;
         }
@@ -138,5 +139,15 @@ class Register {
     public int getMaxSize()
     {
         return this.max;
+    }
+
+    public int getNumItems()
+    {
+        int r = 0;
+        for (int a : numItems)
+        {
+            r =r +a;
+        }
+        return r;
     }
 }
