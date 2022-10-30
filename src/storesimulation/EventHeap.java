@@ -44,19 +44,18 @@ class EventHeap{
     {
         if(!isLeaf(pos))
         {
-            int swap = pos;
-            if ((pos*2)+1<=currentSize)
-            {
-                swap = (pos*2) +1;
-            }
-            else
-            {
-                swap = (pos*2);
-            }
-            if(eventHeap[pos].getEventTime()<eventHeap[pos*2].getEventTime() || eventHeap[pos].getEventTime()> eventHeap[(pos*2)+1].getEventTime())
-            {
-                swap(pos,swap);
-                minimum(swap);
+            if (eventHeap[pos].getEventTime() > eventHeap[getLeft(pos)].getEventTime()
+                    || eventHeap[pos].getEventTime() > eventHeap[getRight(pos)].getEventTime()) {
+                // if left is smaller than right
+                if (eventHeap[getLeft(pos)].getEventTime() < eventHeap[getRight(pos)].getEventTime()) {
+                    // swap with left
+                    swap(pos, getLeft(pos));
+                    minimum(getLeft(pos));
+                } else {
+                    // swap with right
+                    swap(pos, getRight(pos));
+                    minimum(getRight(pos));
+                }
             }
         }
     }
@@ -106,6 +105,15 @@ class EventHeap{
         return false;
     }
 
+    private int getLeft(int pos)
+    {
+        return pos*2;
+    }
+
+    private int getRight(int pos)
+    {
+        return pos*2+1;
+    }
     /**
      * returns the parent of the node in the given position
      * @param pos position of node you wish to find parent of

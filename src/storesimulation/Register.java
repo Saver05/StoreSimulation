@@ -21,12 +21,11 @@ class Register {
     private int capacity;
     private int start;
     private int end;
-
     private int max;
     private ArrayList<Integer> numItems = new ArrayList<Integer>();
     private int numCust;
     
-    public Register(double scanTime, double payTime)
+    public Register(double sTime, double pTime)
     {
         size =0;
         capacity=30;
@@ -35,6 +34,8 @@ class Register {
         queue = new Customer[capacity-1];
         numCust =0;
         max =0;
+        scanTime = sTime;
+        payTime = pTime;
     }
 
     /**
@@ -57,12 +58,12 @@ class Register {
             end = 0;
         }
         queue[end] = customer;
-        size++;
+        this.size++;
         numCust++;
         numItems.add(customer.getNumItems());
-        if (getLineLength()>max)
+        if (size>max)
         {
-            max = getLineLength();
+            max = size;
         }
     }
 
@@ -72,12 +73,16 @@ class Register {
      */
     public Customer remove()
     {
+        if(isEmpty())
+        {
+            return null;
+        }
         Customer r = queue[start];
         queue[start] =null;
         start++;
         if (start==29)
         {
-            start =0;
+            start=0;
         }
         size--;
         return r;
@@ -133,5 +138,9 @@ class Register {
             r =r +a;
         }
         return r;
+    }
+
+    public Customer[] getQueue() {
+        return queue;
     }
 }
